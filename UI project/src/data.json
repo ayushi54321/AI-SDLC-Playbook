@@ -1,0 +1,1376 @@
+{
+  "1": {
+    "title": "Data Analysis and Discovery",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Create an inventory list of all upstream source systems",
+        "No",
+        "Copilot can generate inventory templates and consolidate metadata but requires SME validation",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Document source system ownership & SME contacts",
+        "No",
+        "Requires organizational knowledge and stakeholder confirmation",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Capture source system SLAs, refresh frequency & data availability windows",
+        "No",
+        "Copilot can draft SLA documentation from notes but inputs must come from SMEs",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Identify data sensitivity & compliance classifications",
+        "No",
+        "Compliance classification requires governance and legal decisions",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Document authentication mechanisms (OAuth, Service Principal, Keys, MI)",
+        "Partial",
+        "Copilot can generate documentation templates and summaries",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Create inventory of all source objects (volume, keys, dependencies)",
+        "Partial",
+        "Copilot can generate SQL scripts to extract metadata and dependencies",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Perform data profiling (row count, null %, duplicates, distributions)",
+        "Yes",
+        "Copilot can generate profiling SQL/Python scripts automatically",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Analyze slowly changing attributes and determine SCD type",
+        "Partial",
+        "Copilot suggests SCD patterns, but SME decision required",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Document mandatory vs optional attributes",
+        "No",
+        "Copilot helps document rules from analysis outputs",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Identify historical retention requirements",
+        "No",
+        "Retention decisions are business and compliance driven",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Capture freshness & latency expectations",
+        "No",
+        "Requires business SLA agreement",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Create/Capture business definitions, KPIs & metric glossary",
+        "Partial",
+        "Copilot drafts definitions but business validation required",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Identify functional/subject areas",
+        "No",
+        "Requires domain understanding",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Identify required aggregation levels",
+        "Partial",
+        "Copilot suggests patterns but grain decisions require SME",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Create source‑to‑raw mapping document",
+        "Partial",
+        "Copilot generates mapping templates",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Document standardization rules (date format, currency normalization, etc.)",
+        "Partial",
+        "Copilot generates standardization logic examples",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Create transformation logic inventory & SCD strategy",
+        "Yes",
+        "Copilot helps document transformation patterns",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Identify surrogate key strategy & uniqueness rules",
+        "Yes",
+        "Copilot suggests approaches but architecture decision required",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Create conceptual data model (entities & relationships)",
+        "Partial",
+        "Copilot generates initial ER structure",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Define data quality checks & alerting thresholds",
+        "Yes",
+        "Copilot generates DQ rule templates and validation SQL",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Capture access control requirements (RBAC, masking, encryption)",
+        "No",
+        "Security decisions require governance approval",
+        "",
+        ""
+      ],
+      [
+        22,
+        "Define retention, archival & purging policies",
+        "No",
+        "Compliance and governance driven",
+        "",
+        ""
+      ],
+      [
+        23,
+        "Document performance expectations (latency, throughput)",
+        "No",
+        "Requires architecture and business alignment",
+        "",
+        ""
+      ],
+      [
+        24,
+        "Capture scalability, partitioning & data growth expectations",
+        "Partial",
+        "Copilot helps estimate based on historical inputs",
+        "",
+        ""
+      ],
+      [
+        25,
+        "Identify downstream SLAs for consuming systems",
+        "No",
+        "Requires business agreement",
+        "",
+        ""
+      ],
+      [
+        26,
+        "Document risks, assumptions & dependencies",
+        "Partial",
+        "Help with templates",
+        "",
+        ""
+      ],
+      [
+        27,
+        "Define acceptance criteria for completing analysis phase",
+        "Partial",
+        "Copilot generates template acceptance criteria",
+        "",
+        ""
+      ],
+      [
+        28,
+        "Create consolidated summary document of all analysis findings",
+        "Yes",
+        "Copilot generates executive summary documents",
+        "",
+        ""
+      ]
+    ]
+  },
+  "2": {
+    "title": "Data Ingestion",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Create an approach document for ingestion type (Full, Incremental, CDC) including watermark / delta logic",
+        "Yes",
+        "Copilot generates architecture documentation and patterns",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Create an approach document for landing zones (ADLS / OneLake), file formats (Parquet, Delta, CSV, JSON) and batch vs near-real-time ingestion",
+        "Yes",
+        "Copilot drafts storage and format comparison documents",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Create an approach document for partitioning strategy, dependency & trigger strategy, retry & timeout policies",
+        "Partial",
+        "Copilot suggests patterns but performance decisions need SME",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Create an approach document for parallelism & throttling strategy, error handling & failure paths",
+        "Partial",
+        "Copilot generates standard pipeline patterns",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Create an approach document for managed identity usage, Key Vault integration, credential storage and RBAC for storage & pipelines",
+        "Partial",
+        "Copilot generates documentation but security approval required",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Provision ADF instance (Dev/Test/Prod) and configure Git integration",
+        "No",
+        "Requires Azure environment provisioning",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Configure global parameters, Integration Runtime (Azure / Self-hosted), and Key Vault integration",
+        "No",
+        "Environment configuration task",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Create Linked Services for source systems, ADLS/Blob, Key Vault, REST APIs, databases etc.",
+        "Yes",
+        "Copilot generates configuration templates",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Create pipelines for full load and incremental load",
+        "Yes",
+        "Copilot generates pipeline JSON and activities",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Implement watermark logic for incremental ingestion",
+        "Yes",
+        "Copilot generates incremental logic patterns",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Implement dynamic file naming logic",
+        "Yes",
+        "Copilot generates expressions and logic",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Implement schema validation during ingestion",
+        "Yes",
+        "Copilot generates validation activities",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Implement logging & audit activities (start time, end time, counts, status)",
+        "Yes",
+        "Copilot generates logging framework",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Implement failure handling workflows & alerting mechanisms",
+        "Partial",
+        "Copilot generates retry and alert logic",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Create schedule triggers and event-based triggers as needed",
+        "Partial",
+        "Copilot suggests configuration but deployment manual",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Build parent-child pipeline orchestration",
+        "Yes",
+        "Copilot generates orchestration patterns",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Implement dependency checks (file arrival, upstream completion, control tables)",
+        "Partial",
+        "Copilot generates control table logic",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Validate trigger execution & record counts (source vs target)",
+        "Partial",
+        "Copilot generates validation queries",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Validate schema consistency (data types, column drift, missing columns)",
+        "Partial",
+        "Copilot generates comparison scripts",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Validate null constraints & key constraints",
+        "Yes",
+        "Copilot generates checks",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Validate incremental load correctness (late-arriving data, duplicates, change detection)",
+        "Partial",
+        "AI generates tests but validation requires SME",
+        "",
+        ""
+      ],
+      [
+        22,
+        "Validate handling of late-arriving data patterns",
+        "Partial",
+        "Copilot suggests handling logic",
+        "",
+        ""
+      ],
+      [
+        23,
+        "Validate business metrics post-load",
+        "No",
+        "Requires business validation",
+        "",
+        ""
+      ],
+      [
+        24,
+        "Capture data quality issues (profiling + DQ rule failures)",
+        "Yes",
+        "Copilot generates DQ logging logic",
+        "",
+        ""
+      ],
+      [
+        25,
+        "Configure ADF monitoring dashboards",
+        "Partial",
+        "Copilot suggests metrics",
+        "",
+        ""
+      ],
+      [
+        26,
+        "Configure Log Analytics workspace integration",
+        "No",
+        "Environment configuration",
+        "",
+        ""
+      ],
+      [
+        27,
+        "Define alerting thresholds (pipeline duration, failure, size mismatch)",
+        "No",
+        "Operational decision",
+        "",
+        ""
+      ],
+      [
+        28,
+        "Test alert notifications (email, webhook, Teams alerts)",
+        "No",
+        "Execution task",
+        "",
+        ""
+      ],
+      [
+        29,
+        "Set up Azure DevOps pipelines for ADF (CI/CD)",
+        "Partial",
+        "Copilot generates YAML templates",
+        "",
+        ""
+      ],
+      [
+        30,
+        "Implement parameterized deployments across environments",
+        "Yes",
+        "Copilot generates parameter templates",
+        "",
+        ""
+      ],
+      [
+        31,
+        "Configure environment-specific variables (Dev/Test/Prod)",
+        "No",
+        "Environment setup",
+        "",
+        ""
+      ],
+      [
+        32,
+        "Test automated deployments end-to-end",
+        "No",
+        "Execution validation task",
+        "",
+        ""
+      ],
+      [
+        33,
+        "Document ingestion runbook (how-to-run, restart logic, troubleshooting steps)",
+        "Yes",
+        "Copilot generates runbook documentation",
+        "",
+        ""
+      ],
+      [
+        34,
+        "Create ingestion control tables (watermark table, audit table, status table)",
+        "Yes",
+        "Copilot generates SQL scripts",
+        "",
+        ""
+      ],
+      [
+        35,
+        "Implement metadata-driven pipeline pattern (if required)",
+        "Partial",
+        "Copilot generates framework templates",
+        "",
+        ""
+      ],
+      [
+        36,
+        "Implement schema drift handling mechanism (ADF Mapping Data Flow or PySpark)",
+        "Partial",
+        "Copilot generates logic examples",
+        "",
+        ""
+      ],
+      [
+        37,
+        "Implement archival/purging logic for landing zone files",
+        "Partial",
+        "Copilot generates purge scripts",
+        "",
+        ""
+      ]
+    ]
+  },
+  "3": {
+    "title": "Data Processing",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Provision the Databricks workspace (Dev/Test/Prod)",
+        "No",
+        "Environment provisioning",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Configure cluster policies, autoscaling & cost controls",
+        "No",
+        "Requires cost and governance decision",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Configure Git integration for notebooks (Repos)",
+        "No",
+        "Environment setup",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Set up Unity Catalog with catalog → schema → table governance model",
+        "Partial",
+        "Copilot helps documentation but governance required",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Create raw → bronze ingestion transformation logic",
+        "Yes",
+        "Copilot generates PySpark code",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Implement bronze → silver cleansing & standardization logic",
+        "Yes",
+        "Copilot generates cleansing logic",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Implement silver → gold aggregations & business transformations",
+        "Yes",
+        "Copilot generates aggregation code",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Implement Delta Lake optimization logic (OPTIMIZE, Z-Order, VACUUM)",
+        "Yes",
+        "Copilot generates optimization commands",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Implement merge/upsert logic for incremental/CDC loads",
+        "Yes",
+        "Copilot generates Delta merge logic",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Implement watermark and CDC logic inside notebooks",
+        "Partial",
+        "Copilot generates incremental patterns",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Implement schema drift/change detection & handling",
+        "Partial",
+        "Copilot generates detection logic",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Implement deduplication logic (primary/business keys)",
+        "Partial",
+        "Copilot generates window-based logic",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Implement late arriving & outlier data handling strategy",
+        "Partial",
+        "Copilot suggests patterns",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Implement audit logging tables (pipeline run, counts, status, errors)",
+        "Yes",
+        "Copilot generates table scripts",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Implement control tables (pipeline config, watermark, audit, status)",
+        "Yes",
+        "Copilot generates schema",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Implement data quality rules programmatically (Great Expectations / Custom)",
+        "Yes",
+        "Copilot generates rule templates",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Implement error handling and rerun framework (idempotent design)",
+        "Yes",
+        "Copilot generates idempotent logic",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Optimize notebooks (partitioning, caching, checkpointing, broadcast joins)",
+        "Partial",
+        "Copilot suggests optimization",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Implement Databricks job orchestration (jobs, multi-task workflows)",
+        "Partial",
+        "Copilot generates job configuration templates",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Configure job notifications (email, Teams, webhook)",
+        "Partial",
+        "Copilot suggests configuration",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Configure job run logs into Log Analytics",
+        "No",
+        "Environment configuration",
+        "",
+        ""
+      ],
+      [
+        22,
+        "Validate all transformations (raw→bronze→silver→gold)",
+        "Partial",
+        "Copilot generates validation queries",
+        "",
+        ""
+      ],
+      [
+        23,
+        "Validate SCD logic (Type 0/1/2)",
+        "Partial",
+        "AI assists but validation needed",
+        "",
+        ""
+      ],
+      [
+        24,
+        "Validate aggregations & business measures",
+        "No",
+        "Business validation required",
+        "",
+        ""
+      ],
+      [
+        25,
+        "Validate data quality rule outputs & exception handling",
+        "Partial",
+        "Copilot generates checks",
+        "",
+        ""
+      ],
+      [
+        26,
+        "Create optimization & performance test report (cost, latency, cluster usage)",
+        "Yes",
+        "Copilot generates analysis summary",
+        "",
+        ""
+      ],
+      [
+        27,
+        "Create Databricks Runbook (execution, restart logic, troubleshooting)",
+        "Yes",
+        "Copilot generates documentation",
+        "",
+        ""
+      ]
+    ]
+  },
+  "4": {
+    "title": "Data Publishing",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Create required gold tables ",
+        "Yes",
+        "Copilot generates SQL structures",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Validate published table schema formats (column names, types, precision/scale)",
+        "Yes",
+        "Copilot generates validation scripts",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Publish curated tables to ADLS/OneLake for analytics consumption",
+        "Partial",
+        "Copilot assists but deployment manual",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Publish Delta tables to Databricks Unity Catalog (catalog/schema/table)",
+        "Partial",
+        "Requires environment execution",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Apply column-level security",
+        "Partial",
+        "Security decision",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Apply row-level security (RLS)",
+        "Partial",
+        "Access policy decision",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Implement masking logic (Dynamic Masking / Custom Masking)",
+        "Partial",
+        "Copilot generates masking logic",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Apply ACLs / RBAC on curated/published tables",
+        "No",
+        "Governance task",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Validate record counts between silver → gold → published layers",
+        "Yes",
+        "Copilot generates comparison queries",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Validate business metrics alignment with semantic model expectations",
+        "Partial",
+        "SME validation required",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Define retention & archival policies for raw/silver/gold layers",
+        "No",
+        "Governance decision",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Implement purge process for outdated or expired data",
+        "Yes",
+        "Copilot generates scripts",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Create data contract for all published datasets (schema, SLAs, DQ rules, lineage)",
+        "Yes",
+        "Copilot generates templates",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Create lineage documentation for each published dataset",
+        "Yes",
+        "Copilot generates documentation",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Validate schema drift handling at the published layer",
+        "Yes",
+        "Copilot generates checks",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Validate metadata completeness (descriptions, tags, data types)",
+        "Yes",
+        "Copilot generates audit scripts",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Implement table versioning and change management process",
+        "Partial",
+        "Copilot suggests approach",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Ensure compatibility for downstream semantic model consumption (Power BI)",
+        "Partial",
+        "Copilot suggests checks",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Validate access permissions with different personas/roles (Data Engineer, Analyst, Viewer)",
+        "No ",
+        "Manual testing",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Configure monitoring and alerting for published layer refresh/load failures",
+        "Partial",
+        "Copilot suggests metrics",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Document published dataset SLAs (availability, freshness, latency)",
+        "Yes",
+        "Copilot generates documentation",
+        "",
+        ""
+      ]
+    ]
+  },
+  "5": {
+    "title": "Analytics Layer",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Create the list of Fact and Dimension tables",
+        "Partial",
+        "Copilot suggests patterns",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Define the grain of each Fact table",
+        "No",
+        "Business decision",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Define the relationship model (Star/Snowflake)",
+        "Partial",
+        "Copilot suggests star schema",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Define all business measures & KPIs",
+        "Partial",
+        "Business owned",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Create the semantic model dataset in Power BI / Fabric",
+        "Yes",
+        "Copilot assists creation",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Import data or configure Direct Lake / Direct Query connection",
+        "Partial",
+        "Copilot suggests configuration",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Create calculated columns",
+        "Yes",
+        "Copilot generates DAX",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Create DAX measures",
+        "Yes",
+        "Copilot generates DAX measures",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Create hierarchies (Date, Product, Customer, etc.)",
+        "Yes",
+        "Copilot suggests hierarchies",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Implement Row-Level Security (RLS) rules",
+        "Partial",
+        "Security decision",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Implement Perspectives (consumer-friendly views)",
+        "Yes",
+        "Copilot assists creation",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Validate model relationships & cardinality",
+        "Partial",
+        "Copilot suggests corrections",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Validate model performance (storage engine / formula engine)",
+        "Partial",
+        "Copilot suggests optimization",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Run DAX Studio for performance analysis & fix bottlenecks",
+        "Partial",
+        "Copilot explains optimization",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Run Vertipaq Analyzer (compression, dictionary size)",
+        "Partial",
+        "Copilot interprets results",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Do load/performance testing",
+        "No",
+        "Execution task",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Validate refresh success & data correctness",
+        "Partial",
+        "Copilot assists checks",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Validate Direct Lake performance (if applicable)",
+        "Partial",
+        "Copilot suggests checks",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Ensure naming conventions and standard formatting",
+        "Yes",
+        "Copilot enforces standards",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Ensure measure folder organization (Display Folders)",
+        "Yes",
+        "Copilot organizes",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Optimize model size (remove unused columns/tables)",
+        "Partial",
+        "Copilot suggests removals",
+        "",
+        ""
+      ],
+      [
+        22,
+        "Validate KPI outputs with business stakeholders",
+        "No",
+        "Business validation",
+        "",
+        ""
+      ],
+      [
+        23,
+        "Publish semantic model to Workspace",
+        "No",
+        "Manual deployment",
+        "",
+        ""
+      ],
+      [
+        24,
+        "Configure Scheduled Refresh",
+        "No",
+        "Environment setup",
+        "",
+        ""
+      ],
+      [
+        25,
+        "Set refresh failure notifications",
+        "No ",
+        "Configuration task",
+        "",
+        ""
+      ],
+      [
+        26,
+        "Create model documentation (tables, relationships, measures, KPIs, RLS)",
+        "Yes",
+        "Copilot generates documentation",
+        "",
+        ""
+      ]
+    ]
+  },
+  "6": {
+    "title": "Reporting",
+    "columns": [
+      "Task Id",
+      "Task",
+      "Can it be done using Automation/Copilot?",
+      "Comments",
+      "How to Do?",
+      "Story Points"
+    ],
+    "rows": [
+      [
+        1,
+        "Define report layout, visual design, and UX strategy",
+        "Partial",
+        "Copilot suggests layout ideas",
+        "",
+        ""
+      ],
+      [
+        2,
+        "Define user roles & personas (executive, manager, analyst, operational user)",
+        "No",
+        "Business decision",
+        "",
+        ""
+      ],
+      [
+        3,
+        "Build report navigation and information architecture (home page, sections, drill paths)",
+        "Partial",
+        "Copilot suggests patterns",
+        "",
+        ""
+      ],
+      [
+        4,
+        "Build report pages (overview, detail, trend, exception)",
+        "Partial",
+        "Copilot accelerates visual creation",
+        "",
+        ""
+      ],
+      [
+        5,
+        "Build visuals, charts, cards, KPIs, matrices",
+        "Partial",
+        "Copilot suggests visual types",
+        "",
+        ""
+      ],
+      [
+        6,
+        "Apply conditional formatting (threshold-based, color semantics, icons)",
+        "Yes",
+        "Copilot generates rules",
+        "",
+        ""
+      ],
+      [
+        7,
+        "Add drill-through pages, bookmarks, and interactions",
+        "Partial",
+        "Copilot suggests setup",
+        "",
+        ""
+      ],
+      [
+        8,
+        "Apply corporate themes & branding (color palettes, fonts, styles)",
+        "Partial",
+        "Copilot helps generate theme JSON",
+        "",
+        ""
+      ],
+      [
+        9,
+        "Implement Row-Level Security (RLS) inherited from semantic model",
+        "No ",
+        "Security decision",
+        "",
+        ""
+      ],
+      [
+        10,
+        "Validate visual interactions & cross-filter behavior",
+        "No",
+        "Manual testing",
+        "",
+        ""
+      ],
+      [
+        11,
+        "Test report with sample users (UAT / pilot group)",
+        "No",
+        "User validation",
+        "",
+        ""
+      ],
+      [
+        12,
+        "Validate numbers with business stakeholders (Finance/Operations/SMEs)",
+        "No",
+        "Business validation",
+        "",
+        ""
+      ],
+      [
+        13,
+        "Validate business definitions & KPIs consistency with semantic model",
+        "No",
+        "Business validation",
+        "",
+        ""
+      ],
+      [
+        14,
+        "Optimize report performance (DAX optimization, visual reduction, query folding)",
+        "Partial",
+        "Copilot suggests improvements",
+        "",
+        ""
+      ],
+      [
+        15,
+        "Validate performance using Performance Analyzer",
+        "Partial",
+        "Copilot interprets results",
+        "",
+        ""
+      ],
+      [
+        16,
+        "Validate semantic model performance impact (Direct Lake / Import)",
+        "Partial",
+        "Copilot assists analysis",
+        "",
+        ""
+      ],
+      [
+        17,
+        "Publish report to workspace",
+        "No",
+        "Manual deployment",
+        "",
+        ""
+      ],
+      [
+        18,
+        "Configure scheduled refresh & associated permissions",
+        "No",
+        "Environment configuration",
+        "",
+        ""
+      ],
+      [
+        19,
+        "Configure subscriptions & data alerts (if required)",
+        "No",
+        "Configuration task",
+        "",
+        ""
+      ],
+      [
+        20,
+        "Set up deployment pipelines (Dev → Test → Prod)",
+        "No",
+        "Environment setup",
+        "",
+        ""
+      ],
+      [
+        21,
+        "Validate report behavior across environments",
+        "No",
+        "Manual testing",
+        "",
+        ""
+      ],
+      [
+        22,
+        "Conduct accessibility & usability checks (contrast, navigation)",
+        "Partial",
+        "Copilot suggests improvements",
+        "",
+        ""
+      ],
+      [
+        23,
+        "Create documentation (pages, visuals, KPIs, RLS, data sources)",
+        "Yes",
+        "Copilot generates documentation",
+        "",
+        ""
+      ]
+    ]
+  }
+}
