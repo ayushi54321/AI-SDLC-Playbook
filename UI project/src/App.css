@@ -350,13 +350,13 @@ body {
   font-weight: 400;
 }
 
-.section-heading {
+/* .section-heading {
   color: #1f2937;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 30px;
   font-family: 'Inter', sans-serif;
-}
+} */
 
 .category-buttons {
   display: flex;
@@ -469,9 +469,9 @@ body {
     font-size: 1rem;
   }
   
-  .section-heading {
+  /* .section-heading {
     font-size: 1.2rem;
-  }
+  } */
   
   .category-buttons {
     gap: 12px;

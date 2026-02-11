@@ -29,7 +29,7 @@ function App() {
 
   const sections = [
     { id: 1, Icon: Search, description: 'Create inventory list, document ownership, and identify data sources for comprehensive analysis.', category: 'Azure' },
-    { id: 2, Icon: Download, description: 'Extract and load data from various sources into your data platform efficiently.', category: 'Azure' },
+    { id: 2, Icon: Download, description: 'Extract and load data from various sources into data platform efficiently.', category: 'Azure' },
     { id: 3, Icon: Settings, description: 'Transform and process raw data into structured, analytics-ready formats.', category: 'Azure' },
     { id: 4, Icon: Upload, description: 'Publish processed data to consumption layers for business intelligence use.', category: 'Azure' },
     { id: 5, Icon: BarChart3, description: 'Build semantic models and curated datasets for advanced analytics and insights.', category: 'Azure' },
@@ -69,7 +69,7 @@ function App() {
           <h1 className="landing-title">AI Software Development Life Cycle Playbook</h1>
           <p className="landing-description">A Master Framework for Building Scalable, Governed, and Intelligent Analytics Platforms.</p>
           
-          <h3 className="section-heading">Explore Our Framework</h3>
+          {/* <h3 className="section-heading">Explore Our Framework</h3> */}
           
           <div className="category-buttons">
             {categories.map(category => (
