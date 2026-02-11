@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import excelData from './data.json'
-import { Search, Download, Settings, Upload, BarChart3, FileText } from 'lucide-react'
+import { Search, Download, Settings, Upload, BarChart3, FileText, ExternalLink, Copy, Check } from 'lucide-react'
 
 function App() {
   const [showLandingPage, setShowLandingPage] = useState(true)
   const [activeTable, setActiveTable] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('Azure')
+  const [showModal, setShowModal] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   // Use Excel data from Azure BI Playbook.xlsx
   const tableData = excelData
@@ -19,6 +21,13 @@ function App() {
       setIsLoading(false)
       setShowLandingPage(false)
     }, 500)
+  }
+
+  const copyToClipboard = () => {
+    const promptText = "Create a comprehensive data dictionary for the following tables: [Table Names]. Include column names, data types, descriptions, primary keys, foreign keys, and any constraints. Also generate a visual data lineage diagram showing the flow of data from source to destination."
+    navigator.clipboard.writeText(promptText)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   const categories = [
@@ -149,15 +158,68 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {tableData[activeTable].rows.map((row, rowIndex) => (
-                  <tr key={rowIndex}>
-                    {row.map((cell, cellIndex) => (
-                      <td key={cellIndex}>{cell !== null && cell !== undefined ? cell : ''}</td>
-                    ))}
-                  </tr>
-                ))}
+                {tableData[activeTable].rows.map((row, rowIndex) => {
+                  const copilotColumnIndex = tableData[activeTable].columns.indexOf('Can it be done using Automation/Copilot?')
+                  const howToColumnIndex = tableData[activeTable].columns.indexOf('How to Do?')
+                  const isCopilotYes = row[copilotColumnIndex] === 'Yes'
+                  
+                  return (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => {
+                        // If this is the "How to Do?" column and Copilot is "Yes", show a link
+                        if (cellIndex === howToColumnIndex && isCopilotYes) {
+                          return (
+                            <td key={cellIndex}>
+                              <span 
+                                className="copilot-link" 
+                                title="Click here"
+                                onClick={() => setShowModal(true)}
+                              >
+                                <ExternalLink size={18} />
+                              </span>
+                            </td>
+                          )
+                        }
+                        return <td key={cellIndex}>{cell !== null && cell !== undefined ? cell : ''}</td>
+                      })}
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Popup */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowModal(false)}>&times;</button>
+            <h2>How to Do</h2>
+            
+            <div className="modal-scroll-content">
+              <div className="modal-section">
+                <h3>Area</h3>
+                <p>Data Analysis and Discovery</p>
+              </div>
+
+              <div className="modal-section">
+                <h3>Task</h3>
+                <p>Generate schema documentation and data lineage diagrams</p>
+              </div>
+
+              <div className="modal-section">
+                <h3>Prompt</h3>
+                <div className="prompt-box">
+                  <button className="copy-button" onClick={copyToClipboard}>
+                    {copied ? <Check size={16} /> : <Copy size={16} />}
+                    <span>{copied ? 'Copied!' : 'Copy'}</span>
+                  </button>
+                  <p>Create a comprehensive data dictionary for the following tables: [Table Names]. Include column names, data types, descriptions, primary keys, foreign keys, and any constraints. Also generate a visual data lineage diagram showing the flow of data from source to destination.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
