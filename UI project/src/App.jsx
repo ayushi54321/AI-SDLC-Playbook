@@ -6,7 +6,7 @@ function App() {
   const [showLandingPage, setShowLandingPage] = useState(true)
   const [activeTable, setActiveTable] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('Azure')
 
   // Use Excel data from Azure BI Playbook.xlsx
   const tableData = excelData
