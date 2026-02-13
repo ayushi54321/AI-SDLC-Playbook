@@ -1,0 +1,259 @@
+{
+  "DataAnalysisAndDiscovery": [
+    {
+      "area": "DataAnalysisAndDiscovery",
+      "task": "Perform data profiling (row count, null %, duplicates, distributions)",
+      "copilotPrompt": "Act as a Senior Data Engineer. Generate SQL and Python data profiling scripts to calculate row counts, null percentages, duplicate detection, and column distribution statistics. Include reusable profiling framework and performance optimization suggestions."
+    },
+    {
+      "area": "DataAnalysisAndDiscovery",
+      "task": "Create transformation logic inventory & SCD strategy",
+      "copilotPrompt": "Act as a Data Warehouse Architect. Create a transformation logic inventory template and recommend SCD strategy (Type 1, 2, 3, Hybrid). Include transformation mapping table design and sample SQL or PySpark implementation patterns."
+    },
+    {
+      "area": "DataAnalysisAndDiscovery",
+      "task": "Identify surrogate key strategy & uniqueness rules",
+      "copilotPrompt": "Act as a Data Modeling Expert. Design surrogate key strategy and uniqueness enforcement approach. Include natural vs surrogate key decision matrix, key generation methods, and SQL/PySpark examples."
+    },
+    {
+      "area": "DataAnalysisAndDiscovery",
+      "task": "Define data quality checks & alerting thresholds",
+      "copilotPrompt": "Act as a Data Quality Engineer. Generate data quality rule framework including null checks, domain validation, duplicate detection, referential integrity checks, and freshness validation. Include SQL validation queries and alert threshold suggestions."
+    },
+    {
+      "area": "DataAnalysisAndDiscovery",
+      "task": "Create consolidated summary document of all analysis findings",
+      "copilotPrompt": "Act as a Senior Data Platform Consultant. Generate executive-ready consolidated data discovery and analysis summary including data sources overview, DQ observations, modeling strategy summary, risks, and next phase recommendations."
+    }
+  ],
+  "DataIngestion": [
+    {
+      "area": "DataIngestion",
+      "task": "Create an approach document for ingestion type (Full, Incremental, CDC) including watermark / delta logic",
+      "copilotPrompt": "Act as a Senior Data Architect. Create an ingestion strategy document comparing Full Load, Incremental Load, and CDC patterns. Include watermark/delta logic design, pros/cons, architecture diagrams, and sample implementation logic using ADF or Fabric pipelines."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Create an approach document for landing zones (ADLS / OneLake), file formats (Parquet, Delta, CSV, JSON) and batch vs near-real-time ingestion",
+      "copilotPrompt": "Act as a Data Platform Architect. Create a storage and landing zone design document comparing ADLS vs OneLake and file formats (Parquet, Delta, CSV, JSON). Include batch vs near real-time ingestion comparison and recommended architecture patterns."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Create Linked Services for source systems, ADLS/Blob, Key Vault, REST APIs, databases etc.",
+      "copilotPrompt": "Generate Azure Data Factory Linked Service JSON templates for ADLS, SQL Database, REST API, Key Vault, and Blob Storage. Include parameterization and best practices for secure credential handling."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Create pipelines for full load and incremental load",
+      "copilotPrompt": "Generate Azure Data Factory pipeline JSON templates for Full Load and Incremental Load patterns. Include Copy Activities, control tables, and parameter-driven pipeline design."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Implement watermark logic for incremental ingestion",
+      "copilotPrompt": "Generate watermark-based incremental ingestion logic using ADF pipelines and SQL control tables. Include initial load logic, delta extraction query pattern, and watermark update logic."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Implement dynamic file naming logic",
+      "copilotPrompt": "Generate ADF dynamic expressions for file naming using timestamp, source system, and batch ID. Include reusable parameterized examples."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Implement schema validation during ingestion",
+      "copilotPrompt": "Generate ingestion schema validation logic using ADF Data Flows or notebook validation. Include column validation, datatype checks, and drift detection examples."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Implement logging & audit activities (start time, end time, counts, status)",
+      "copilotPrompt": "Generate ingestion logging framework design including start time, end time, record counts, status, and error logs. Include SQL audit table schema and pipeline logging activities."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Build parent-child pipeline orchestration",
+      "copilotPrompt": "Generate parent-child orchestration pipeline design using ADF. Include dynamic execution, parameter passing, dependency control, and monitoring logic."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Validate null constraints & key constraints",
+      "copilotPrompt": "Generate SQL validation queries to detect null violations, duplicate primary keys, and referential integrity failures during ingestion."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Capture data quality issues (profiling + DQ rule failures)",
+      "copilotPrompt": "Generate DQ logging framework capturing profiling results, rule failures, and exception data. Include SQL table design and pipeline logging integration."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Implement parameterized deployments across environments",
+      "copilotPrompt": "Generate ARM or parameter JSON templates to support multi-environment ADF deployment with environment-specific overrides."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Document ingestion runbook (how-to-run, restart logic, troubleshooting steps)",
+      "copilotPrompt": "Create an ingestion runbook including pipeline execution steps, restart logic, troubleshooting guide, and monitoring checklist."
+    },
+    {
+      "area": "DataIngestion",
+      "task": "Create ingestion control tables (watermark table, audit table, status table)",
+      "copilotPrompt": "Generate SQL scripts to create watermark table, audit table, and pipeline status control tables including indexes and relationships."
+    }
+  ],
+  "DataProcessing": [
+    {
+      "area": "DataProcessing",
+      "task": "Create raw → bronze ingestion transformation logic",
+      "copilotPrompt": "Generate PySpark notebook code to ingest raw data into Bronze Delta tables including schema enforcement, partitioning, and audit columns."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement bronze → silver cleansing & standardization logic",
+      "copilotPrompt": "Generate PySpark cleansing logic for Silver layer including null handling, standardization, deduplication, and data type enforcement."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement silver → gold aggregations & business transformations",
+      "copilotPrompt": "Generate PySpark or SQL aggregation logic for Gold layer including business aggregations, dimension joins, and KPI calculations."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement Delta Lake optimization logic (OPTIMIZE, Z-Order, VACUUM)",
+      "copilotPrompt": "Generate Delta Lake optimization commands including OPTIMIZE, ZORDER, VACUUM and explain when to use each."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement merge/upsert logic for incremental/CDC loads",
+      "copilotPrompt": "Generate Delta MERGE statement examples for incremental and CDC ingestion including insert, update, and delete handling."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement audit logging tables (pipeline run, counts, status, errors)",
+      "copilotPrompt": "Generate SQL scripts to create audit logging tables capturing run metadata, record counts, status, and error details."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement control tables (pipeline config, watermark, audit, status)",
+      "copilotPrompt": "Generate control table schemas for pipeline configuration, watermark tracking, audit logging, and status tracking."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement data quality rules programmatically (Great Expectations / Custom)",
+      "copilotPrompt": "Generate Great Expectations or custom PySpark DQ rule framework templates including rule catalog and validation execution pattern."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Implement error handling and rerun framework (idempotent design)",
+      "copilotPrompt": "Generate idempotent data processing framework with error handling, checkpointing, and rerun support."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Create optimization & performance test report (cost, latency, cluster usage)",
+      "copilotPrompt": "Generate performance and cost analysis report template including cluster usage, job latency, and cost optimization insights."
+    },
+    {
+      "area": "DataProcessing",
+      "task": "Create Databricks Runbook (execution, restart logic, troubleshooting)",
+      "copilotPrompt": "Create Databricks operations runbook including job execution, restart steps, monitoring, and troubleshooting scenarios."
+    }
+  ],
+  "DataPublishing": [
+    {
+      "area": "DataPublishing",
+      "task": "Create required gold tables",
+      "copilotPrompt": "Generate SQL scripts to create Gold layer tables with surrogate keys, audit columns, and partition strategy."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Validate published table schema formats (column names, types, precision/scale)",
+      "copilotPrompt": "Generate schema validation SQL comparing expected vs actual schema including datatype and precision checks."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Validate record counts between silver → gold → published layers",
+      "copilotPrompt": "Generate SQL reconciliation queries comparing record counts between Silver, Gold, and Published layers."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Implement purge process for outdated or expired data",
+      "copilotPrompt": "Generate SQL or PySpark purge scripts for expired data based on retention policy."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Create data contract for all published datasets (schema, SLAs, DQ rules, lineage)",
+      "copilotPrompt": "Generate data contract template including schema, SLAs, DQ rules, and lineage metadata."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Create lineage documentation for each published dataset",
+      "copilotPrompt": "Generate dataset lineage documentation template including source to consumption mapping."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Validate schema drift handling at the published layer",
+      "copilotPrompt": "Generate schema drift detection SQL and alerting logic."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Validate metadata completeness (descriptions, tags, data types)",
+      "copilotPrompt": "Generate metadata audit SQL checking descriptions, tags, and data types completeness."
+    },
+    {
+      "area": "DataPublishing",
+      "task": "Document published dataset SLAs (availability, freshness, latency)",
+      "copilotPrompt": "Generate SLA documentation template covering availability, latency, and freshness metrics."
+    }
+  ],
+  "AnalyticsLayer": [
+    {
+      "area": "AnalyticsLayer",
+      "task": "Create the semantic model dataset in Power BI / Fabric",
+      "copilotPrompt": "Generate steps to create Power BI semantic model dataset including table import, relationships, and initial measures."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Create calculated columns",
+      "copilotPrompt": "Generate DAX calculated column examples for date intelligence, categorization, and surrogate key mapping."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Create DAX measures",
+      "copilotPrompt": "Generate reusable DAX measure templates for aggregations, YTD, MTD, YoY, and ratio metrics."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Create hierarchies (Date, Product, Customer, etc.)",
+      "copilotPrompt": "Generate hierarchy design suggestions for Date, Geography, Product, and Customer dimensions."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Implement Perspectives (consumer-friendly views)",
+      "copilotPrompt": "Generate Power BI perspective design recommendations for different personas."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Ensure naming conventions and standard formatting",
+      "copilotPrompt": "Generate Power BI naming convention standards for tables, columns, and measures."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Ensure measure folder organization (Display Folders)",
+      "copilotPrompt": "Generate Display Folder organization strategy for measures grouped by subject area."
+    },
+    {
+      "area": "AnalyticsLayer",
+      "task": "Create model documentation (tables, relationships, measures, KPIs, RLS)",
+      "copilotPrompt": "Generate semantic model documentation template including tables, relationships, measures, KPIs, and RLS rules."
+    }
+  ],
+  "Reporting": [
+    {
+      "area": "Reporting",
+      "task": "Apply conditional formatting (threshold-based, color semantics, icons)",
+      "copilotPrompt": "Generate Power BI conditional formatting rules including threshold-based colors, icons, and KPI highlighting."
+    },
+    {
+      "area": "Reporting",
+      "task": "Create documentation (pages, visuals, KPIs, RLS, data sources)",
+      "copilotPrompt": "Generate report documentation template including report pages, visuals, filters, KPIs, data sources, and RLS details."
+    }
+  ]
+}
