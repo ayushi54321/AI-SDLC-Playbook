@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import excelData from './data.json'
+import copilotPrompts from './copilotPrompts.json'
 import { Search, Download, Settings, Upload, BarChart3, FileText, ExternalLink, Copy, Check } from 'lucide-react'
 
 function Home() {
@@ -31,17 +32,91 @@ function Home() {
   // Check URL params to determine which view to show
   const tableParam = searchParams.get('table')
   const showModal = searchParams.get('prompt') === 'true'
+  const selectedTaskId = searchParams.get('taskId')
   const activeTable = tableParam ? (getTableIdFromSlug(tableParam) || 1) : 1
   const showLandingPage = !tableParam
+
+  const formatArea = (area = '') => area.replace(/([a-z])([A-Z])/g, '$1 $2').trim()
+  const normalizeText = (value = '') => (
+    value
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  )
+
+  const getPromptForTask = (areaTitle = '', taskName = '') => {
+    const areaEntry = Object.entries(copilotPrompts).find(([areaKey]) => (
+      normalizeText(formatArea(areaKey)) === normalizeText(areaTitle)
+    ))
+
+    if (!areaEntry || !taskName) {
+      return null
+    }
+
+    const [, tasks] = areaEntry
+    const normalizedTask = normalizeText(taskName)
+
+    let match = tasks.find((item) => normalizeText(item.task) === normalizedTask)
+    if (!match) {
+      match = tasks.find((item) => (
+        normalizeText(item.task).includes(normalizedTask) ||
+        normalizedTask.includes(normalizeText(item.task))
+      ))
+    }
+
+    return match || null
+  }
+
+  const activeTableData = tableData[activeTable]
+  const taskIdColumnIndex = activeTableData?.columns.indexOf('Task Id') ?? -1
+  const taskColumnIndex = activeTableData?.columns.indexOf('Task') ?? -1
+  const selectedRow = showModal && activeTableData && taskIdColumnIndex >= 0
+    ? activeTableData.rows.find((row) => String(row[taskIdColumnIndex]) === String(selectedTaskId))
+    : null
+  const selectedTask = selectedRow && taskColumnIndex >= 0 ? selectedRow[taskColumnIndex] : ''
+  const selectedPrompt = getPromptForTask(activeTableData?.title || '', selectedTask)
+  const modalPromptDetails = showModal ? {
+    area: activeTableData?.title || '-',
+    task: selectedPrompt?.task || selectedTask || '-',
+    prompt: selectedPrompt?.copilotPrompt || 'Prompt not available for this task.'
+  } : null
+
+  const closePromptModal = () => {
+    setCopied(false)
+    setSearchParams({ table: titleToSlug(tableData[activeTable].title) })
+  }
+
+  const openPromptModal = (taskId) => {
+    setCopied(false)
+    setSearchParams({
+      table: titleToSlug(tableData[activeTable].title),
+      prompt: 'true',
+      taskId: String(taskId)
+    })
+  }
 
   const handleTableSelect = (tableNum) => {
     const slug = titleToSlug(tableData[tableNum].title)
     setSearchParams({ table: slug })
   }
 
-  const copyToClipboard = () => {
-    const promptText = "Create a comprehensive data dictionary for the following tables: [Table Names]. Include column names, data types, descriptions, primary keys, foreign keys, and any constraints. Also generate a visual data lineage diagram showing the flow of data from source to destination."
-    navigator.clipboard.writeText(promptText)
+  const copyToClipboard = async () => {
+    if (!modalPromptDetails?.prompt) return
+    try {
+      await navigator.clipboard.writeText(modalPromptDetails.prompt)
+    } catch {
+      const fallback = document.createElement('textarea')
+      fallback.value = modalPromptDetails.prompt
+      fallback.setAttribute('readonly', '')
+      fallback.style.position = 'absolute'
+      fallback.style.left = '-9999px'
+      document.body.appendChild(fallback)
+      fallback.select()
+      document.execCommand('copy')
+      document.body.removeChild(fallback)
+    }
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -178,7 +253,7 @@ function Home() {
                               <span 
                                 className="copilot-link" 
                                 title="View Prompt"
-                                onClick={() => setSearchParams({ table: titleToSlug(tableData[activeTable].title), prompt: 'true' })}
+                                onClick={() => openPromptModal(taskIdColumnIndex >= 0 ? row[taskIdColumnIndex] : rowIndex + 1)}
                               >
                                 <ExternalLink size={18} />
                               </span>
@@ -198,20 +273,20 @@ function Home() {
 
       {/* Modal Popup */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setSearchParams({ table: titleToSlug(tableData[activeTable].title) })}>
+        <div className="modal-overlay" onClick={closePromptModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSearchParams({ table: titleToSlug(tableData[activeTable].title) })}>&times;</button>
+            <button className="modal-close" onClick={closePromptModal}>&times;</button>
             <h2>How to Do</h2>
             
             <div className="modal-scroll-content">
               <div className="modal-section">
                 <h3>Area</h3>
-                <p>Data Analysis and Discovery</p>
+                <p>{modalPromptDetails?.area || '-'}</p>
               </div>
 
               <div className="modal-section">
                 <h3>Task</h3>
-                <p>Generate schema documentation and data lineage diagrams</p>
+                <p>{modalPromptDetails?.task || '-'}</p>
               </div>
 
               <div className="modal-section">
@@ -221,7 +296,7 @@ function Home() {
                     {copied ? <Check size={16} /> : <Copy size={16} />}
                     <span>{copied ? 'Copied!' : 'Copy'}</span>
                   </button>
-                  <p>Create a comprehensive data dictionary for the following tables: [Table Names]. Include column names, data types, descriptions, primary keys, foreign keys, and any constraints. Also generate a visual data lineage diagram showing the flow of data from source to destination.</p>
+                  <p>{modalPromptDetails?.prompt || '-'}</p>
                 </div>
               </div>
             </div>

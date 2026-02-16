@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Eye, X } from 'lucide-react'
+import { Eye, X, Copy, Check } from 'lucide-react'
 import copilotPrompts from './copilotPrompts.json'
 
 function TableDetails() {
   const navigate = useNavigate()
   const [selectedPrompt, setSelectedPrompt] = useState(null)
+  const [promptCopied, setPromptCopied] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterArea, setFilterArea] = useState('All')
 
@@ -15,36 +16,64 @@ function TableDetails() {
 
   const handleCloseModal = () => {
     setSelectedPrompt(null)
+    setPromptCopied(false)
   }
 
-  // Flatten the new structure into a single array with taskId
-  const allPrompts = Object.entries(copilotPrompts).flatMap(([area, tasks]) => 
-    tasks.map((task, index) => ({
-      area: task.area,
-      taskId: index + 1,
-      task: task.task,
-      prompt: task.copilotPrompt
+  const handleCopyPrompt = async () => {
+    if (!selectedPrompt?.prompt) return
+    try {
+      await navigator.clipboard.writeText(selectedPrompt.prompt)
+    } catch {
+      const fallback = document.createElement('textarea')
+      fallback.value = selectedPrompt.prompt
+      fallback.setAttribute('readonly', '')
+      fallback.style.position = 'absolute'
+      fallback.style.left = '-9999px'
+      document.body.appendChild(fallback)
+      fallback.select()
+      document.execCommand('copy')
+      document.body.removeChild(fallback)
+    }
+    setPromptCopied(true)
+    setTimeout(() => setPromptCopied(false), 2000)
+  }
+
+  const formatArea = (area = '') => area.replace(/([a-z])([A-Z])/g, '$1 $2').trim()
+  const normalizeText = (value = '') => value.toLowerCase().replace(/\s+/g, ' ').trim()
+
+  const allPrompts = Object.entries(copilotPrompts)
+    .flatMap(([areaKey, tasks]) =>
+      tasks.map((task) => ({
+        area: areaKey,
+        areaLabel: formatArea(areaKey),
+        task: task.task,
+        prompt: task.copilotPrompt
+      }))
+    )
+    .map((item, index) => ({
+      ...item,
+      id: index + 1
     }))
-  )
 
   // Get unique areas for filter
-  const areas = ['All', ...new Set(allPrompts.map(p => p.area))]
+  const areas = ['All', ...new Set(allPrompts.map((p) => p.areaLabel))]
 
   // Filter prompts based on search and area filter
-  const filteredPrompts = allPrompts.filter(p => {
-    const matchesSearch = p.prompt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         p.area.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         p.task.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         p.taskId.toString().includes(searchTerm)
-    const matchesArea = filterArea === 'All' || p.area === filterArea
+  const filteredPrompts = allPrompts.filter((p) => {
+    const search = searchTerm.toLowerCase()
+    const matchesSearch = p.prompt.toLowerCase().includes(search) ||
+                         p.areaLabel.toLowerCase().includes(search) ||
+                         p.task.toLowerCase().includes(search) ||
+                         p.id.toString().includes(search)
+    const matchesArea = filterArea === 'All' || normalizeText(p.areaLabel) === normalizeText(filterArea)
     return matchesSearch && matchesArea
   })
 
-  // Helper function to get prompt summary/context
-  const getPromptContext = (prompt) => {
-    // Display the prompt as-is, CSS will handle truncation
-    return prompt
-  }
+  const promptSections = selectedPrompt ? [
+    { key: 'area', label: 'Area', value: selectedPrompt.areaLabel },
+    { key: 'task', label: 'Task', value: selectedPrompt.task },
+    { key: 'prompt', label: 'Prompt', value: selectedPrompt.prompt, isPrompt: true }
+  ] : []
 
   return (
     <div className="app-container">
@@ -69,18 +98,17 @@ function TableDetails() {
       </div>
 
       <div className="table-container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-          <h2 className="table-title" style={{ margin: 0 }}>Prompt Library</h2>
+        <div className="prompt-library-header">
+          <h2 className="table-title">Prompt Library</h2>
 
           {/* Search and Filter */}
-          <div className="search-filter-container" style={{ margin: 0, flex: '0 0 auto', display: 'flex', gap: '12px' }}>
+          <div className="search-filter-container">
             <input
               type="text"
               placeholder="Search prompts by area, task, or keywords..."
               className="search-input"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              style={{ width: '350px' }}
             />
             <select
               className="filter-select"
@@ -95,40 +123,36 @@ function TableDetails() {
         </div>
 
         <div className="table-wrapper">
-          <table className="data-table">
+          <table className="data-table prompt-library-table">
             <thead>
               <tr>
-                <th style={{ width: '6%', padding: '16px 24px' }}>Task ID</th>
-                <th style={{ width: '32%', padding: '16px 24px' }}>Task</th>
-                <th style={{ width: '15%', padding: '16px 24px' }}>Area</th>
-                <th style={{ width: '47%', padding: '16px 24px' }}>Prompt</th>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Area</th>
+                <th>Prompt</th>
+                <th aria-label="Action"></th>
               </tr>
             </thead>
             <tbody>
-              {filteredPrompts.map((item, index) => (
-                <tr key={index}>
-                  <td style={{ fontWeight: '600', padding: '16px 24px' }}>{item.taskId}</td>
-                  <td style={{ padding: '16px 24px' }}>{item.task}</td>
-                  <td style={{ padding: '16px 24px' }}>
-                    <span className="area-badge">
-                      {item.area}
-                    </span>
+              {filteredPrompts.map((item) => (
+                <tr key={item.id}>
+                  <td className="prompt-id-cell">{item.id}</td>
+                  <td>{item.task}</td>
+                  <td className="prompt-area-cell">{item.areaLabel}</td>
+                  <td>
+                    <p className="prompt-text">
+                      {item.prompt}
+                    </p>
                   </td>
-                  <td style={{ padding: '16px 24px' }}>
-                    <div className="prompt-cell-content">
-                      <p className="prompt-text">
-                        {getPromptContext(item.prompt)}
-                      </p>
-                      <div className="prompt-actions">
-                        <button
-                          onClick={() => handleViewPrompt(item)}
-                          className="action-btn"
-                          title="View full prompt"
-                        >
-                          <Eye size={18} />
-                        </button>
-                      </div>
-                    </div>
+                  <td className="prompt-action-cell">
+                    <button
+                      onClick={() => handleViewPrompt(item)}
+                      className="action-btn"
+                      title="View full prompt"
+                      aria-label={`View prompt ${item.id}`}
+                    >
+                      <Eye size={18} />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -149,8 +173,7 @@ function TableDetails() {
           <div className="details-modal">
             <div className="modal-header">
               <div className="modal-header-content">
-                <h2>{selectedPrompt.area}</h2>
-                <p>{selectedPrompt.task}</p>
+                <h2>Prompt Details</h2>
               </div>
               <button
                 onClick={handleCloseModal}
@@ -160,7 +183,30 @@ function TableDetails() {
               </button>
             </div>
             <div className="modal-body">
-              <p>{selectedPrompt.prompt}</p>
+              {promptSections.map((section) => (
+                <div
+                  className={`prompt-details-section${section.isPrompt ? ' prompt-section-locked' : ''}`}
+                  key={section.key}
+                >
+                  <h3>{section.label}</h3>
+                  {section.isPrompt ? (
+                    <div className="prompt-text-box prompt-text-box-locked">
+                      <button
+                        className="prompt-copy-btn"
+                        onClick={handleCopyPrompt}
+                        title="Copy full prompt"
+                        aria-label="Copy full prompt"
+                      >
+                        {promptCopied ? <Check size={16} /> : <Copy size={16} />}
+                        <span>{promptCopied ? 'Copied' : 'Copy'}</span>
+                      </button>
+                      <div className="prompt-details-text">{section.value || '-'}</div>
+                    </div>
+                  ) : (
+                    <p>{section.value || '-'}</p>
+                  )}
+                </div>
+              ))}
             </div>
             <div className="modal-footer">
               <button
